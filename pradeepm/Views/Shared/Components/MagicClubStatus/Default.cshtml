@@ -1,0 +1,27 @@
+﻿@{ 
+    bool requested = ViewBag.requested;
+    bool approved = ViewBag.approved;
+}
+<div class="card statustic-progress-card">
+    <div class="card-block">
+        <div class="row align-items-center">
+            <div class="col">
+                <i class="fa fa-user f-20 m-b-10"></i>
+                <h6 class="text-muted">Join Magic Club</h6>
+            </div>
+        </div>
+        @if (requested && !approved)
+        {
+            <span class="label label-info">Requested | Not Approved</span>
+        }
+        else if (requested && approved)
+        {
+            <span class="label label-success">Requested | Approved</span>
+        }
+        else
+        {
+            <a class="btn btn-success btn-sm" asp-action="AddtoClub" asp-controller="MagicClub">Join Magic Club</a>
+        }
+
+    </div>
+</div>

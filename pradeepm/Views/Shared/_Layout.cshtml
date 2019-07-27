@@ -1,0 +1,205 @@
+﻿@{
+    var alert = Context.Session.GetAlert();
+    string type = "";
+    string icon = "fa fa fa-check";
+    string message = "";
+    if (alert!=null)
+    {
+
+        type = "success";
+        message = alert.Message;
+        switch (alert.Type)
+        {
+            case Alerttype.error:
+                type = "danger";
+                icon = "fa fa-times";
+                break;
+            case Alerttype.warning:
+                type = "warning";
+                icon = "fa fa-exclamation-triangle";
+                break;
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - pradeepm</title>
+
+    @*<environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>*@
+    <!-- Required Fremwork -->
+    <link rel="icon" href="~/files/assets/images/favicon.ico" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="~/files/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="~/files/bower_components/bootstrap/css/bootstrap.min.css">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="~/files/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- themify icon -->
+    <link rel="stylesheet" type="text/css" href="~/files/assets/icon/themify-icons/themify-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="~/files/assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- am chart export.css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- scrollbar.css -->
+    <link rel="stylesheet" type="text/css" href="~/files/assets/css/jquery.mCustomScrollbar.css">
+    <!-- radial chart.css -->
+    <link rel="stylesheet" href="~/files/assets/pages/chart/radial/css/radial.css" type="text/css" media="all">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="~/files/assets/css/style.css">
+    @* Notifications *@
+    <link rel="stylesheet" type="text/css" href="../files/assets/pages/notification/notification.css">
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <partial name="_Loader" />
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <partial name="_Header" />
+
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <partial name="_Navigation" />
+
+                    <div class="pcoded-content">
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+
+                                    <div class="page-body">
+                                        <div class="row">
+
+                                            @RenderBody()
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="styleSelector">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/files/bower_components/jquery/js/jquery.min.js "></script>
+    <script type="text/javascript" src="~/files/bower_components/jquery-ui/js/jquery-ui.min.js "></script>
+    <script type="text/javascript" src="~/files/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/files/bower_components/bootstrap/js/bootstrap.min.js "></script>
+    <script type="text/javascript" src="~/files/assets/pages/widget/excanvas.js "></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="~/files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js "></script>
+    <!-- waves js -->
+    <script src="~/files/assets/pages/waves/js/waves.min.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="~/files/bower_components/modernizr/js/modernizr.js "></script>
+    <!-- slimscroll js -->
+    <script type="text/javascript" src="~/files/assets/js/SmoothScroll.js"></script>
+    <script src="~/files/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+    <!-- Chart js -->
+    <script type="text/javascript" src="~/files/bower_components/chart.js/js/Chart.js"></script>
+    <!-- amchart js -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="~/files/assets/pages/widget/amchart/gauge.js"></script>
+    <script src="~/files/assets/pages/widget/amchart/serial.js"></script>
+    <script src="~/files/assets/pages/widget/amchart/light.js"></script>
+    <script src="~/files/assets/pages/widget/amchart/pie.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <!-- Google map js -->
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="~/files/assets/pages/google-maps/gmaps.js"></script>
+
+    <!-- menu js -->
+    <script src="~/files/assets/js/pcoded.min.js"></script>
+    <script src="~/files/assets/js/vertical/vertical-layout.min.js "></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="~/files/assets/pages/dashboard/crm-dashboard.js"></script>
+    <script type="text/javascript" src="~/files/assets/js/script.js "></script>
+
+    @* Notification js *@
+    <script type="text/javascript" src="~/files/assets/js/bootstrap-growl.min.js"></script>
+    @*<script type="text/javascript" src="~/files/assets/pages/notification/notification.js"></script>*@
+
+
+    <script>
+        $(document).ready(function () {
+
+            /*--------------------------------------
+                 Notifications & Dialogs
+             ---------------------------------------*/
+            /*
+             * Notifications
+             */
+            function notify(from, align, icon, type,message) {
+                $.growl({
+                    icon: icon,
+                    title: " Notification ! ",
+                    message: message,
+                    url: ''
+                }, {
+                        element: 'body',
+                        type: type,
+                        allow_dismiss: true,
+                        placement: {
+                            from: from,
+                            align: align
+                        },
+                        offset: {
+                            x: 30,
+                            y: 30
+                        },
+                        spacing: 10,
+                        z_index: 999999,
+                        delay: 2500,
+                        timer: 1000,
+                        url_target: '_blank',
+                        mouse_over: false,
+                        animate: {
+                            enter: 'animated fadeInRight',
+                            exit: 'animated fadeOutRight'
+                        },
+                        icon_type: 'class',
+                        template: '<div data-growl="container" class="alert" role="alert">' +
+                            '<button type="button" class="close" data-growl="dismiss">' +
+                            '<span aria-hidden="true">&times;</span>' +
+                            '<span class="sr-only">Close</span>' +
+                            '</button>' +
+                            '<span data-growl="icon"></span>' +
+                            '<span data-growl="title"></span>' +
+                            '<span data-growl="message"></span>' +
+                            '<a href="#" data-growl="url"></a>' +
+                            '</div>'
+                    });
+            };
+
+            if(@type.Length>0) {
+                   notify('top', 'right', '@icon', '@type', '@message');
+               }
+            
+        });
+        
+    </script>
+    <script src="~/files/assets/js/pcoded.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

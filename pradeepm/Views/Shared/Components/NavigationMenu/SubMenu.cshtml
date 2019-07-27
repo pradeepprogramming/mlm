@@ -1,0 +1,35 @@
+﻿@model ChildrenItems
+@{
+    Layout = null;
+    var cuser = Context.Session.Get<LoginUser>("loginuser");
+}
+
+@if (Model.usertype == null || Model.usertype.Contains(cuser.usertype))
+{
+    <li class="@(Model.childrens != null ? "pcoded-hasmenu" : "")">
+
+        @if (Model.childrens != null && Model.childrens.Count > 0)
+        {
+            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                <span class="pcoded-micon"><i class="@Model.icon"></i></span>
+                <span class="pcoded-mtext">@Model.name</span>
+                <span class="pcoded-mcaret"></span>
+            </a>
+            foreach (ChildrenItems items in Model.childrens)
+            {
+                @await Component.InvokeAsync("NavigationMenu", new { childrens = items })
+            }
+        }
+        else
+        {
+            <a asp-controller="@(Model.Controller)" asp-action="@(Model.Action)" class="waves-effect waves-dark">
+                <span class="pcoded-micon"><i class="@Model.icon"></i></span>
+                <span class="pcoded-mtext">@Model.name</span>
+                <span class="pcoded-mcaret"></span>
+            </a>
+        }
+
+    </li>
+}
+
+

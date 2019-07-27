@@ -1,0 +1,17 @@
+﻿@model DataBoxModel
+@{ 
+    
+}
+<div class="card">
+    <div class="card-block">
+        <div class="row align-items-center m-l-0">
+            <div class="col-auto">
+                <i class="fa fa-@(Model.Icon) f-30 text-c-@(Model.IconColor)"></i>
+            </div>
+            <div class="col-auto">
+                <h6 class="text-muted m-b-10">@Model.Text</h6>
+                <h2 class="m-b-0">@Model.Data</h2>
+            </div>
+        </div>
+    </div>
+</div>
