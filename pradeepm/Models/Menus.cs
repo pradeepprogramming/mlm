@@ -5,17 +5,22 @@ using System.Threading.Tasks;
 
 namespace pradeepm.Models
 {
-    public class Menus
+    public class UserType
+    {
+        public string usertype { get; set; }
+    }
+    public class Menus:UserType
     {
         public string lavel { get; set; }
+        
         public List<MainMenuItems> menuitems { get; set; }
     }
-    public class MenuFor
+    public class MenuFor:UserType
     {
         /// <summary>
         /// if user type is "" then all user can access this menu otherwise if user type match or contains that usertypename
         /// </summary>
-        public string usertype { get; set; }
+        
         public string icon { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }

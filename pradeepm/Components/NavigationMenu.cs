@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using pradeepm.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace pradeepm.Components
@@ -11,7 +9,7 @@ namespace pradeepm.Components
     public class NavigationMenu : ViewComponent
     {
 
-        public async Task<IViewComponentResult> InvokeAsync(ChildrenItems childrens = null)
+        public async Task<IViewComponentResult> InvokeAsync(MainMenuItems childrens = null)
         {
             if (childrens == null)
             {
@@ -46,47 +44,138 @@ namespace pradeepm.Components
                                 name="Products",
                                 icon="ti-home",
                                 usertype="admin"
+                            }
+                        }
+                    },
+                    new Menus{
+                        lavel="Accounts",
+                        menuitems=new List<MainMenuItems>{
+                            new MainMenuItems{
+                                name="All Accounts",
+                                icon="ti-menu",
+                                    usertype="admin",
+                                Controller="User",
+                                Action="Index"
                             },
                             new MainMenuItems{
-                                name="Accounts",
+                                name="Blocked Accounts",
+                                icon="ti-menu",
+                                    usertype="admin",
+                                Controller="User",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="Unblocked Accounts",
+                                icon="ti-menu",
+                                    usertype="admin",
+                                Controller="User",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="Account joining",
                                 icon="ti-user",
-                                childrens=new List<ChildrenItems>{
-                                    new ChildrenItems{
-                                        name="All Accounts",
-                                        icon="ti-menu",
-                                         usertype="admin",
-                                        Controller="User",
-                                        Action="Index"
-                                    },
-                                    new ChildrenItems{
-                                        name="Account joining",
-                                        icon="ti-user",
-                                        Controller="User",
-                                        Action="joining"
-                                    },
-                                    new ChildrenItems{
-                                        name="Account Tree",
-                                        icon="ti-menu-alt",
-                                        Controller="User",
-                                        Action="tree"
-                                    },
-                                    new ChildrenItems{
-                                        name="Magic Club Requests",
-                                        icon="ti-ticket",
-                                        usertype="admin",
-                                        Controller="MagicClub",
-                                        Action="Index"
-                                    }
-                                }
+                                Controller="User",
+                                Action="joining"
                             },
                             new MainMenuItems{
-                                name="Profile",
-                                icon="ti-id-badge",
-                                usertype="user"
+                                name="Account Tree",
+                                icon="ti-menu-alt",
+                                Controller="User",
+                                Action="tree"
+                            },
+                            new MainMenuItems{
+                                name="Magic Club Requests",
+                                icon="ti-ticket",
+                                usertype="admin",
+                                Controller="MagicClub",
+                                Action="Index"
+                            }
+                        }
+                    },
+                    new Menus{
+                        lavel="Pins",
+                        menuitems=new List<MainMenuItems>{
+                            new MainMenuItems{
+                                name="All Pins",
+                                icon="ti-menu",
+                                    usertype="admin",
+                                Controller="User",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="Unused Pins",
+                                icon="ti-user",
+                                Controller="User",
+                                Action="joining"
+                            },
+                            new MainMenuItems{
+                                name="Used pins",
+                                icon="ti-menu-alt",
+                                Controller="User",
+                                Action="tree"
+                            },
+                            new MainMenuItems{
+                                name="Genrate pins",
+                                icon="ti-ticket",
+                                usertype="admin",
+                                Controller="MagicClub",
+                                Action="Index"
+                            }
+                        }
+                    },
+                    new Menus{
+                        lavel="Payout",
+                        menuitems=new List<MainMenuItems>{
+                            new MainMenuItems{
+                                name="All Payout",
+                                icon="ti-menu",
+                                    usertype="admin",
+                                Controller="User",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="User wise income",
+                                icon="ti-user",
+                                Controller="User",
+                                Action="joining"
+                            },
+                            new MainMenuItems{
+                                name="User Payment",
+                                icon="ti-menu-alt",
+                                Controller="User",
+                                Action="tree"
+                            }
+                        }
+                    },
+                    new Menus{
+                        lavel="Profile",
+                        usertype="user",
+                        menuitems=new List<MainMenuItems>{
+                            new MainMenuItems{
+                                name="Show Profile",
+                                icon="ti-user",
+                                usertype="user",
+                                Controller="profile",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="Update Profile",
+                                icon="ti-user",
+                                usertype="user",
+                                Controller="profile",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="Upload Profile Pic",
+                                icon="ti-user",
+                                usertype="user",
+                                Controller="profile",
+                                Action="Index"
                             }
                         }
                     }
                 };
+
                 return menus;
             });
         }

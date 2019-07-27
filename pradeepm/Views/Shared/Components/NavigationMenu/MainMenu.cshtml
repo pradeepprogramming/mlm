@@ -7,53 +7,56 @@
 
 @foreach (Menus menu in Model)
 {
-    if (menu.lavel.Length > 0)
+    if (menu.usertype == null || menu.usertype.Contains(cuser.usertype))
     {
-        <div class="pcoded-navigation-label">@menu.lavel</div>
-    }
-    <ul class="pcoded-item pcoded-left-item">
-        @if (menu.menuitems.Count > 0)
+
+        if (menu.lavel.Length > 0)
         {
-            foreach (MainMenuItems mainMenu in menu.menuitems)
+            <div class="pcoded-navigation-label">@menu.lavel</div>
+        }
+        <ul class="pcoded-item pcoded-left-item">
+            @if (menu.menuitems.Count > 0)
             {
-                if (mainMenu.usertype == null || mainMenu.usertype.Contains(cuser.usertype))
+                foreach (MainMenuItems mainMenu in menu.menuitems)
                 {
-
-                <li class="@(mainMenu.childrens != null ? "pcoded-hasmenu" : "") ">
-
-                    @if (mainMenu.childrens != null)
+                    if (mainMenu.usertype == null || mainMenu.usertype.Contains(cuser.usertype))
                     {
-                        <a href="javascript:void(0)" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="@mainMenu.icon"></i><b>D</b></span>
-                            <span class="pcoded-mtext">@mainMenu.name</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                        <ul class="pcoded-submenu">
-                            @foreach (ChildrenItems item in mainMenu.childrens)
-                            {
 
-                                @await Component.InvokeAsync("NavigationMenu", new { childrens = item })
+                        <li class="@(mainMenu.childrens != null ? "pcoded-hasmenu" : "") ">
+
+                            @if (mainMenu.childrens != null)
+                            {
+                                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="@mainMenu.icon"></i><b>D</b></span>
+                                    <span class="pcoded-mtext">@mainMenu.name</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    @foreach (ChildrenItems item in mainMenu.childrens)
+                                    {
+
+                                        @await Component.InvokeAsync("NavigationMenu", new { childrens = item })
+
+                                    }
+                                </ul>
 
                             }
-                        </ul>
-
+                            else
+                            {
+                                <a asp-controller="@(mainMenu.Controller)" asp-action="@(mainMenu.Action)" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="@mainMenu.icon"></i><b>D</b></span>
+                                    <span class="pcoded-mtext">@mainMenu.name</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            }
+                        </li>
                     }
-                    else
-                    {
-                        <a asp-controller="@(mainMenu.Controller)" asp-action="@(mainMenu.Action)" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="@mainMenu.icon"></i><b>D</b></span>
-                            <span class="pcoded-mtext">@mainMenu.name</span>
-                            <span class="pcoded-mcaret"></span>
-                        </a>
-                    }
-                </li>
                 }
+
             }
-
-        }
-    </ul>
+        </ul>
+    }
 }
-
 @*<ul class="pcoded-item pcoded-left-item">
         <li class="pcoded-hasmenu active pcoded-trigger">
             <a href="javascript:void(0)" class="waves-effect waves-dark">
