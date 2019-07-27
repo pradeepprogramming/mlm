@@ -20,8 +20,8 @@ namespace pradeepm.Components
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var user = HttpContext.Session.Get<LoginUser>("loginuser");
-            //var mcstatus= await _db.Magicclub.Where(w => w.Accountid == user.loignid).ToAsyncEnumerable().FirstOrDefault();
-            Magicclub mcstatus = null;
+            var mcstatus= await _db.Magicclub.Where(w => w.Accountid == user.loignid).ToAsyncEnumerable().FirstOrDefault();
+            //Magicclub mcstatus = null;
             ViewBag.requested = mcstatus == null ? false : true;
             ViewBag.approved = mcstatus != null && mcstatus.Status == 1 ? true : false;
             return View();
