@@ -89,5 +89,23 @@ namespace pradeepm.Controllers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        
+        public IActionResult IsPinValid(string pincode)
+        {
+            if(pincode.Length>9)
+            {
+                var pin = _db.Pins.Where(w => w.PinCode == pincode).FirstOrDefault();
+                if(pin!=null && pin.PinCode==pincode)
+                {
+                    return Ok("success");
+                }
+                else
+                {
+                    return Ok("error");
+                }
+            }
+            return Ok("error");
+        }
     }
 }
