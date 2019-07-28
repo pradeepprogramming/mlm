@@ -12,11 +12,11 @@ namespace pradeepm.Controllers
     public class UserController : Controller
     {
         therisingstarContext _db;
-        LoginUser _LoginUser;
+        
         public UserController(therisingstarContext context)
         {
             _db = context;
-            _LoginUser = HttpContext.Session.Get<LoginUser>("loginuser");
+            
         }
         public IActionResult Index()
         {
@@ -156,7 +156,7 @@ namespace pradeepm.Controllers
                                         SendSMS.Joining(newuser.AccountId, newuser.DisplayName, Candidate.Mobile.ToString(), newuser.Password, newuser.Tpassword);
                                         try
                                         {
-                                            _LoginUser = HttpContext.Session.Get<LoginUser>("loginuser");
+                                            LoginUser _LoginUser = HttpContext.Session.Get<LoginUser>("loginuser");
                                             if (_LoginUser != null && _LoginUser.loignid>0)
                                             {
                                                 HttpContext.Session.SetAlert(new Alertmessage
