@@ -1,0 +1,102 @@
+﻿@model IEnumerable<pradeepm.Models.DB.AccountUsers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>All accounts</h2>
+
+
+<table class="table ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tpassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SponserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Side)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JoiningAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <div class="align-middle m-b-30">
+                    <img src="../files/assets/images/faq_man.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                    <div class="d-inline-block">
+                        <h6>@item.AccountId</h6>
+                        <p class="text-muted m-b-0">@(item.DisplayName.Substring(0,item.DisplayName.Length>20?20:item.DisplayName.Length))</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tpassword)
+            </td>
+            <td>
+                <div class="align-middle m-b-30">
+                    <img src="../files/assets/images/faq_man.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                    <div class="d-inline-block">
+                        <h6>@item.SponserId</h6>
+                        <p class="text-muted m-b-0">name will</p>
+                    </div>
+                </div>
+                
+            </td>
+            <td>
+                <div class="align-middle m-b-30">
+                    <img src="../files/assets/images/faq_man.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                    <div class="d-inline-block">
+                        <h6>@item.FatherId</h6>
+                        <p class="text-muted m-b-0">name will</p>
+                    </div>
+                </div>
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Side)
+            </td>
+            <td>
+                <div class="align-middle m-b-30">
+                    <div class="d-inline-block">
+                        <h6>@item.ProductId</h6>
+                        <p class="text-muted m-b-0">name will</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JoiningAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

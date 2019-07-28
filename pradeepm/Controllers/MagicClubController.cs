@@ -15,7 +15,21 @@ namespace pradeepm.Controllers
 
         public IActionResult Index()
         {
-            List<Magicclub> list = _db.Magicclub.ToList();
+            List<ModelMagicClub> list = (from m in _db.Magicclub
+                                         join a in _db.AccountUsers on m.Accountid equals a.Id
+                                         join p in _db.PrasnalDetails on m.Accountid equals p.AccountUserId
+                                    select new ModelMagicClub
+                                    {
+                                        Accountid = m.Accountid,
+                                        AccountName = a.DisplayName,
+                                        Id = m.Id,
+                                        Joiningdate = m.Joiningdate,
+                                        ProfilePic = p.Profilepic,
+                                        Requestdate = m.Requestdate,
+                                        Status = m.Status,
+                                        UserID=a.AccountId
+
+                                    }).ToList();
             return View(list);
         }
 

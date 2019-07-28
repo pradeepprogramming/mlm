@@ -102,27 +102,27 @@ namespace pradeepm.Components
                                 name="All Pins",
                                 icon="ti-menu",
                                     usertype="admin",
-                                Controller="User",
+                                Controller="Pin",
                                 Action="Index"
                             },
                             new MainMenuItems{
                                 name="Unused Pins",
                                 icon="ti-user",
-                                Controller="User",
-                                Action="joining"
+                                Controller="Pin",
+                                Action="Unused"
                             },
                             new MainMenuItems{
                                 name="Used pins",
                                 icon="ti-menu-alt",
-                                Controller="User",
-                                Action="tree"
+                                Controller="Pin",
+                                Action="Used"
                             },
                             new MainMenuItems{
                                 name="Genrate pins",
                                 icon="ti-ticket",
                                 usertype="admin",
-                                Controller="MagicClub",
-                                Action="Index"
+                                Controller="Pin",
+                                Action="Genrate"
                             }
                         }
                     },
@@ -170,6 +170,13 @@ namespace pradeepm.Components
                             },
                             new MainMenuItems{
                                 name="Upload Profile Pic",
+                                icon="ti-user",
+                                usertype="user",
+                                Controller="profile",
+                                Action="Index"
+                            },
+                            new MainMenuItems{
+                                name="Update Kyc",
                                 icon="ti-user",
                                 usertype="user",
                                 Controller="profile",

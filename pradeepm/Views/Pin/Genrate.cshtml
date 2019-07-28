@@ -1,0 +1,49 @@
+﻿@model ModelGenratePin
+
+@{
+    ViewData["Title"] = "Index";
+    var accountlist = ViewBag.accountlist;
+    var productlist = ViewBag.productlist;
+}
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Genrate Pins</h5>
+            </div>
+            <div class="card-block">
+                <div class="col-md-4">
+
+                    <form asp-action="Genrate">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="UserId" class="control-label"></label>
+                            <select asp-for="UserId" class="form-control" asp-items="@(new SelectList(accountlist,"id","value",Model.UserId))">
+                                <option>Select User Account</option>
+                            </select>
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductId" class="control-label"></label>
+                            <select asp-for="ProductId" class="form-control" asp-items="@(new SelectList(productlist,"id","value",Model.ProductId))">
+                                <option>Select Product</option>
+                            </select>
+                            <span asp-validation-for="ProductId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PinCount" class="control-label"></label>
+                            <input asp-for="PinCount" class="form-control" />
+                            <span asp-validation-for="PinCount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
