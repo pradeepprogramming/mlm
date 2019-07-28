@@ -22,7 +22,7 @@ namespace pradeepm.Models
         
         public string PanCard { get; set; }
         [Required]
-        public string Dateofbirth { get; set; }
+        public DateTime Dateofbirth { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]
