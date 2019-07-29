@@ -19,7 +19,7 @@ namespace pradeepm.Filters
         public void OnActionExecuting(ActionExecutingContext context)
         {
             var loginuser = context.HttpContext.Session.Get<LoginUser>("loginuser");
-
+            ModelGloble.loginuser = loginuser;
             if (context.Controller.GetType() != typeof(AuthController) && loginuser == null)
             {
                 context.Result = new RedirectResult("/Auth/Login");

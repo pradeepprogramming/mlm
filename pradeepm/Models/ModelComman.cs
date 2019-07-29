@@ -10,4 +10,9 @@ namespace pradeepm.Models
         public string id { get; set; }
         public string value { get; set; }
     }
+
+    public static class ModelGloble
+    {
+        public static LoginUser loginuser;
+    }
 }

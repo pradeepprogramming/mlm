@@ -132,7 +132,6 @@ namespace pradeepm.Components
                             new MainMenuItems{
                                 name="All Payout",
                                 icon="ti-menu",
-                                    usertype="admin",
                                 Controller="User",
                                 Action="Index"
                             },

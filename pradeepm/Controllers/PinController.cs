@@ -11,23 +11,38 @@ namespace pradeepm.Controllers
     public class PinController : Controller
     {
         therisingstarContext _db;
+        
         public PinController(therisingstarContext context)
         {
             _db = context;
+           
         }
         public IActionResult Index()
         {
-            var pinlist = _db.Pins.AsEnumerable();
+
+            IEnumerable<Pins> pinlist = null;
+            if (ModelGloble.loginuser.usertype == "admin")
+                pinlist = _db.Pins.AsEnumerable();
+            else
+                pinlist = _db.Pins.Where(w => w.ForUser == ModelGloble.loginuser.loignid).AsEnumerable();
             return View(pinlist);
         }
         public IActionResult Used()
         {
-            var pinlist = _db.Pins.Where(w=>w.UsedBy!=null).AsEnumerable();
+            IEnumerable<Pins> pinlist = null;
+            if (ModelGloble.loginuser.usertype == "admin")
+                pinlist = _db.Pins.Where(w => w.UsedBy != null).AsEnumerable();
+            else
+                pinlist=_db.Pins.Where(w=>w.ForUser==ModelGloble.loginuser.loignid && w.UsedBy!=null).AsEnumerable();
             return View(pinlist);
         }
         public IActionResult Unused()
         {
-            var pinlist = _db.Pins.Where(w => w.UsedBy == null).AsEnumerable();
+            IEnumerable<Pins> pinlist = null;
+            if (ModelGloble.loginuser.usertype == "admin")
+                pinlist = _db.Pins.Where(w=>w.UsedBy==null).AsEnumerable();
+            else
+                pinlist = _db.Pins.Where(w => w.ForUser == ModelGloble.loginuser.loignid && w.UsedBy == null).AsEnumerable();
             return View(pinlist);
         }
 
