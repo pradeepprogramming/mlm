@@ -110,7 +110,6 @@ namespace pradeepm.Components
                             new MainMenuItems{
                                 name="All Pins",
                                 icon="ti-menu",
-                                    usertype="admin",
                                 Controller="Pin",
                                 Action="Index"
                             },
@@ -132,6 +131,12 @@ namespace pradeepm.Components
                                 usertype="admin",
                                 Controller="Pin",
                                 Action="Genrate"
+                            },
+                            new MainMenuItems{
+                                name="Transfer pins",
+                                icon="ti-ticket",
+                                Controller="Pin",
+                                Action="TransferList"
                             }
                         }
                     },
