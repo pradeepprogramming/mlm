@@ -132,20 +132,20 @@ namespace pradeepm.Components
                             new MainMenuItems{
                                 name="All Payout",
                                 icon="ti-menu",
-                                Controller="User",
+                                Controller="Payout",
                                 Action="Index"
                             },
                             new MainMenuItems{
                                 name="User wise income",
                                 icon="ti-user",
-                                Controller="User",
-                                Action="joining"
+                                Controller="Payout",
+                                Action="UserIncome"
                             },
                             new MainMenuItems{
                                 name="User Payment",
                                 icon="ti-menu-alt",
-                                Controller="User",
-                                Action="tree"
+                                Controller="Payout",
+                                Action="Payments"
                             }
                         }
                     },
