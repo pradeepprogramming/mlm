@@ -20,8 +20,40 @@ namespace pradeepm.Controllers
         }
         public IActionResult Index()
         {
-            var users = _db.AccountUsers.AsEnumerable();
+            var users = (from a in _db.AccountUsers
+                         join ad in _db.AccountUsers on a.SponserId equals ad.Id
+                         join af in _db.AccountUsers on a.FatherId equals af.Id
+                         select new
+                         {
+                             UserAccount = a,
+                             SponserName = ad.Name,
+                             FatherName = af.Name,
+                             ProductName = a.Product.Name,
+
+                         }).AsEnumerable();
+
             return View(users);
+        }
+        public IActionResult Direct()
+        {
+            var directlist = (from a in _db.AccountUsers
+                              join ad in _db.AccountUsers on a.SponserId equals ad.Id
+                              join af in _db.AccountUsers on a.FatherId equals af.Id
+                              
+                              where a.SponserId==ModelGloble.loginuser.loignid
+                              select new ModelDisplayUsers
+                              {
+                                 UserAccount=a,
+                                 SponserID=ad.AccountId,
+                                  SponserName=ad.Name,
+                                  FatherID=af.AccountId,
+                                  FatherName=af.Name,
+                                  ProductName=a.Product.Name,
+                                  
+                              }).AsEnumerable();
+                
+                //_db.AccountUsers.Where(w => w.SponserId == ModelGloble.loginuser.loignid).AsEnumerable();
+            return View(directlist);
         }
         public IActionResult GetUserName(string accountid)
         {

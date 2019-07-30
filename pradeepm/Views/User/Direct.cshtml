@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ModelDisplayUsers>
+
+@{
+    ViewData["Title"] = "Direct";
+}
+
+<h2>Direct</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.AccountId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.Tpassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.SponserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.FatherId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.Side)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.JoiningAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAccount.Date)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <div class="align-middle m-b-30">
+                    <img src="../files/assets/images/faq_man.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                    <div class="d-inline-block">
+                        <h6>@item.UserAccount.AccountId</h6>
+                        <p class="text-muted m-b-0">@(item.UserAccount.DisplayName.Substring(0, item.UserAccount.DisplayName.Length > 20 ? 20 : item.UserAccount.DisplayName.Length))</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="align-middle m-b-30">
+                    <img src="../files/assets/images/faq_man.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                    <div class="d-inline-block">
+                        <h6>@item.SponserID</h6>
+                        <p class="text-muted m-b-0">@item.SponserName</p>
+                    </div>
+                </div>
+
+            </td>
+            <td>
+                <div class="align-middle m-b-30">
+                    <img src="../files/assets/images/faq_man.png" alt="user image" class="img-radius img-40 align-top m-r-15">
+                    <div class="d-inline-block">
+                        <h6>@item.FatherID</h6>
+                        <p class="text-muted m-b-0">@item.FatherName</p>
+                    </div>
+                </div>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAccount.Side)
+            </td>
+            <td>
+                <div class="align-middle m-b-30">
+                    <div class="d-inline-block">
+                        <h6>@item.UserAccount.ProductId</h6>
+                        <p class="text-muted m-b-0">@item.ProductName</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAccount.JoiningAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAccount.Date)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

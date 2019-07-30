@@ -23,12 +23,13 @@ namespace pradeepm.Controllers
             ViewBag.leftcount = 0;
             ViewBag.rightcount = 0;
             ViewBag.directcount = 0;
+            ViewBag.binarycount = 0;
             if(binarydetails.Where(w=>w.Legno==1).Count()>0)
                 ViewBag.leftcount = binarydetails.Where(w => w.Legno == 1).Select(s => s.Count).FirstOrDefault();
             if (binarydetails.Where(w => w.Legno == 2).Count() > 0)
-                ViewBag.rightcount = binarydetails.Where(w => w.Legno == 1).Select(s => s.Count).FirstOrDefault();
+                ViewBag.rightcount = binarydetails.Where(w => w.Legno == 2).Select(s => s.Count).FirstOrDefault();
             if (binarydetails.Where(w => w.Legno == 3).Count() > 0)
-                ViewBag.directcount = binarydetails.Where(w => w.Legno == 1).Select(s => s.Count).FirstOrDefault();
+                ViewBag.directcount = binarydetails.Where(w => w.Legno == 3).Select(s => s.Count).FirstOrDefault();
             
             return View();
         }

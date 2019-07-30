@@ -74,17 +74,20 @@ namespace pradeepm.Components
                             new MainMenuItems{
                                 name="Account joining",
                                 icon="ti-user",
-                                Action="joining"
+                                Controller="User",
+                                Action="join"
                             },
                             new MainMenuItems{
                                 name="Account Tree",
                                 icon="ti-menu-alt",
+                                Controller="User",
                                 Action="tree"
                             },
                             new MainMenuItems{
                                 name="Direct Accounts",
                                 icon="ti-menu-alt",
-                                Action="tree"
+                                Controller="User",
+                                Action="Direct"
                             },
                             new MainMenuItems{
                                 name="Magic Club Requests",

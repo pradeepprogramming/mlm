@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using pradeepm.Models.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,5 +39,15 @@ namespace pradeepm.Models
         [Compare("Password", ErrorMessage = "Password Not Matched")]
         public string RetypePassword { get; set; }
 
+    }
+
+    public class ModelDisplayUsers
+    {
+        public AccountUsers UserAccount { get; set; }
+        public string SponserID { get; set; }
+        public string SponserName { get; set; }
+        public string FatherID { get; set; }
+        public string FatherName { get; set; }
+        public string ProductName { get; set; }
     }
 }
