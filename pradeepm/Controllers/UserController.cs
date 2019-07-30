@@ -55,6 +55,29 @@ namespace pradeepm.Controllers
                 //_db.AccountUsers.Where(w => w.SponserId == ModelGloble.loginuser.loignid).AsEnumerable();
             return View(directlist);
         }
+
+        public IActionResult TreeList()
+        {
+            var directlist = (from t in _db.TreeRelation
+                              join a in _db.AccountUsers on t.Accountid equals a.Id
+                              join ad in _db.AccountUsers on a.SponserId equals ad.Id
+                              join af in _db.AccountUsers on a.FatherId equals af.Id
+                              where t.Upperid == ModelGloble.loginuser.loignid
+                              select new ModelDisplayUsers
+                              {
+                                  UserAccount = a,
+                                  SponserID = ad.AccountId,
+                                  SponserName = ad.Name,
+                                  FatherID = af.AccountId,
+                                  FatherName = af.Name,
+                                  ProductName = a.Product.Name,
+
+                              }).AsEnumerable();
+
+            //_db.AccountUsers.Where(w => w.SponserId == ModelGloble.loginuser.loignid).AsEnumerable();
+            return View(directlist);
+        }
+
         public IActionResult GetUserName(string accountid)
         {
             var user = _db.AccountUsers.Where(w => w.AccountId == accountid).FirstOrDefault();

@@ -84,6 +84,12 @@ namespace pradeepm.Components
                                 Action="tree"
                             },
                             new MainMenuItems{
+                                name="Account Tree List",
+                                icon="ti-menu-alt",
+                                Controller="User",
+                                Action="treelist"
+                            },
+                            new MainMenuItems{
                                 name="Direct Accounts",
                                 icon="ti-menu-alt",
                                 Controller="User",
