@@ -35,6 +35,7 @@ namespace pradeepm.Models.DB
         public virtual DbSet<UserClosing> UserClosing { get; set; }
         public virtual DbSet<UserLogins> UserLogins { get; set; }
         public virtual DbSet<Websitedetails> Websitedetails { get; set; }
+        public virtual DbSet<Userbinary> Userbinaries { get; set; }
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
