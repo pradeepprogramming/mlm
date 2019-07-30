@@ -50,4 +50,11 @@ namespace pradeepm.Models
         public string FatherName { get; set; }
         public string ProductName { get; set; }
     }
+
+    public class ModelLastFiveUser
+    {
+        public string AccountId { get; set; }
+        public string DisplayName { get; set; }
+        public string ProfilePic { get; set; }
+    }
 }
