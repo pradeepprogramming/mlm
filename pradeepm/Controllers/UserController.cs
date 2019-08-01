@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using pradeepm.Models;
 using pradeepm.Models.BL;
 using pradeepm.Models.DB;
@@ -206,6 +207,7 @@ namespace pradeepm.Controllers
 
                                         _db.SaveChanges();
 
+                                        _db.Database.ExecuteSqlCommand($"sp_TreeUpdate {newuser.Id},{newuser.FatherId},{newuser.Side}");
 
                                         dbtrain.Commit();
                                         SendSMS.Joining(newuser.AccountId, newuser.DisplayName, Candidate.Mobile.ToString(), newuser.Password, newuser.Tpassword);
