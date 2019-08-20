@@ -17,9 +17,6 @@
                 @Html.DisplayNameFor(model => model.UserAccount.Password)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserAccount.Tpassword)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.UserAccount.SponserId)
             </th>
             <th>
@@ -52,6 +49,11 @@
                             <p class="text-muted m-b-0">@(item.UserAccount.DisplayName.Substring(0, item.UserAccount.DisplayName.Length > 20 ? 20 : item.UserAccount.DisplayName.Length))</p>
                         </div>
                     </div>
+                </td>
+                <td>
+                    <h5>
+                        @item.UserAccount.Password <span class="label label-info">@item.UserAccount.Tpassword</span>
+                    </h5>
                 </td>
                 <td>
                     <div class="align-middle m-b-30">

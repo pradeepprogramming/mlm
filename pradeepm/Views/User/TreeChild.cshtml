@@ -1,0 +1,37 @@
+﻿@model List<AccountUsers>
+@{
+    Layout = null;
+
+    var leftaccount = Model.Where(w => w.Side == 1).FirstOrDefault();
+    var rightaccount = Model.Where(w => w.Side == 2).FirstOrDefault();
+}
+
+@if (leftaccount != null)
+{
+
+    <li>
+        <span class="caret" data-id="@leftaccount.Id"> <span class="label label-primary">Left Leg</span> @Model[0].AccountId  <span class="label label-info">@Model[0].DisplayName</span> </span>
+        <ul class="nested"></ul>
+    </li>
+}
+else
+{
+    <li>
+        <span class=""> <span class="label label-primary">Left Leg</span> <span class="label label-warning">Blank Leg</span> </span>
+        
+    </li>
+}
+@if (rightaccount != null)
+{
+    <li>
+        <span class="caret"  data-id="@rightaccount.Id"> <span class="label label-primary">Right Leg</span> @Model[0].AccountId <span class="label label-info">@Model[0].DisplayName</span> </span>
+        <ul class="nested"></ul>
+    </li>
+}
+else
+{
+    <li>
+        <span class=""> <span class="label label-primary">Right Leg</span> <span class="label label-warning">Blank Leg</span> </span>
+        
+    </li>
+}

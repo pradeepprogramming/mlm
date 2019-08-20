@@ -24,10 +24,12 @@ namespace pradeepm.Controllers
             var users = (from a in _db.AccountUsers
                          join ad in _db.AccountUsers on a.SponserId equals ad.Id
                          join af in _db.AccountUsers on a.FatherId equals af.Id
-                         select new
+                         select new ModelDisplayUsers
                          {
                              UserAccount = a,
+                             SponserID=ad.AccountId,
                              SponserName = ad.Name,
+                             FatherID=af.AccountId,
                              FatherName = af.Name,
                              ProductName = a.Product.Name,
 
@@ -56,7 +58,29 @@ namespace pradeepm.Controllers
                 //_db.AccountUsers.Where(w => w.SponserId == ModelGloble.loginuser.loignid).AsEnumerable();
             return View(directlist);
         }
+        public IActionResult Tree()
+        {
+            //(from t in _db.TreeRelation
+            // join a in _db.AccountUsers on t.Accountid equals a.Id
+            // where t.Upperid == ModelGloble.loginuser.loignid && t.Mlevel==1
+            // select new ModelDisplayUsers
+            // {
+            //     UserAccount = a,
+            //     SponserID = ad.AccountId,
+            //     SponserName = ad.Name,
+            //     FatherID = af.AccountId,
+            //     FatherName = af.Name,
+            //     ProductName = a.Product.Name,
 
+            // }).AsEnumerable();
+            var currentuser=_db.AccountUsers.Where(w => w.Id == ModelGloble.loginuser.loignid).FirstOrDefault();
+            return View(currentuser);
+        }
+        public IActionResult TreeChild(int upperid)
+        {
+            var childuserlist = _db.AccountUsers.Where(w => w.FatherId == upperid).ToList();
+            return View(childuserlist);
+        }
         public IActionResult TreeList()
         {
             var directlist = (from t in _db.TreeRelation
@@ -197,6 +221,7 @@ namespace pradeepm.Controllers
                                             Gender = model.Gender,
                                             Mobile = mobileno,
                                             PanCard = model.PanCard,
+                                            Profilepic= "faq_man.png"
                                         };
 
                                         _db.PrasnalDetails.Add(Candidate);

@@ -1,0 +1,150 @@
+﻿@model AccountUsers
+@{
+    ViewData["Title"] = "Tree";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>
+                User genealogy
+            </h5>
+        </div>
+        <div class="card-block">
+
+            <ul id="myUL">
+                <li>
+                    @*<span class="caret">Beverages</span>
+                        <ul class="nested">
+                            <li>
+                                <span class="caret">Tea</span>
+                                <ul class="nested">
+                                    <li>
+                                        <span class="caret">Green Tea</span>
+                                        <ul class="nested">
+                                            <li>Sencha</li>
+                                            <li>Gyokuro</li>
+                                            <li>Matcha</li>
+                                            <li>Pi Lo Chun</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>*@
+                    <span class="caret" data-id="@Model.Id">@Model.AccountId <span class="label label-info">@Model.DisplayName</span> </span>
+                    <ul class="nested"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    <style>
+        ul, #myUL {
+            list-style-type: none;
+        }
+
+        #myUL {
+            margin: 0;
+            padding: 0;
+        }
+
+            #myUL ul {
+                margin: 0;
+                padding-left: 40px;
+            }
+
+        .caret {
+            cursor: pointer;
+            -webkit-user-select: none; /* Safari 3.1+ */
+            -moz-user-select: none; /* Firefox 2+ */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none;
+        }
+
+        #myUL li::before {
+            background-image: url("/files/assets/images/faq_man.png");
+            background-size: 30px 30px;
+            height: 30px;
+            width: 30px;
+            content: "";
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            top: 10px;
+        }
+
+        .caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .caret-down::before {
+            -ms-transform: rotate(90deg); /* IE 9 */
+            -webkit-transform: rotate(90deg); /* Safari */
+            transform: rotate(90deg);
+        }
+
+        .nested {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var toggler = document.getElementsByClassName("caret");
+            var i;
+
+            $(document).on('click',".caret", function () {
+                var nested = this.parentElement.querySelector(".nested");
+                nested.classList.toggle("active");
+
+                this.classList.toggle("caret-down");
+                var id = this.getAttribute("data-id");
+                console.log("currect user id=" + id + " nested child element=" + nested.childElementCount);
+                if (nested.childElementCount == 0) {
+                    nested.innerHTML = "Wait for Data....";
+                    $.ajax({
+                        url: "treeChild?upperid=" + id,
+                        success: function (data) {
+                            nested.innerHTML = data;
+                        }
+                    });
+                }
+            });
+
+
+            //$(".caret").live("click", function () {
+            //    var nested = this.parentElement.querySelector(".nested");
+            //    nested.classList.toggle("active");
+
+            //    this.classList.toggle("caret-down");
+            //    var id = this.getAttribute("data-id");
+            //    console.log("currect user id=" + id + " nested child element=" + nested.childElementCount);
+            //    if (nested.childElementCount == 0) {
+            //        nested.innerHTML = "Wait for Data....";
+            //        $.ajax({
+            //            url: "treeChild?upperid=" + id,
+            //            success: function (data) {
+            //                nested.innerHTML = data;
+            //            }
+            //        });
+            //    }
+
+            //});
+
+        });
+
+    </script>
+}
+
