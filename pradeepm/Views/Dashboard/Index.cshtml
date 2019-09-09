@@ -6,6 +6,10 @@
     int directcount = ViewBag.directcount;
     int totalcount = leftcount + rightcount;
     int binarycount = ViewBag.binarycount;
+    decimal debit = ViewBag.debit;
+    decimal credit = ViewBag.credit;
+    decimal pendingamount = debit - credit;
+
 }
 
 
@@ -22,13 +26,13 @@
     <partial name="_databox" model='new DataBoxModel {Icon="money",IconColor="green",Text="Total Binary",Data=binarycount.ToString() }' />
 </div>
 <div class="col-xl-3 col-sm-6">
-    <partial name="_databox" model='new DataBoxModel {Icon="money",IconColor="green",Text="Total Earning",Data="0" }' />
+    <partial name="_databox" model='new DataBoxModel {Icon="money",IconColor="green",Text="Total Earning",Data=debit.ToString() }' />
 </div>
 <div class="col-xl-3 col-sm-6">
-    <partial name="_databox" model='new DataBoxModel {Icon="mail-reply",IconColor="red",Text="Payout Withdrawal",Data="0" }' />
+    <partial name="_databox" model='new DataBoxModel {Icon="mail-reply",IconColor="red",Text="Payout Withdrawal",Data=credit.ToString() }' />
 </div>
 <div class="col-xl-3 col-sm-6">
-    <partial name="_databox" model='new DataBoxModel {Icon="money",IconColor="green",Text="Pending Payout",Data="0" }' />
+    <partial name="_databox" model='new DataBoxModel {Icon="money",IconColor="green",Text="Pending Payout",Data=pendingamount.ToString() }' />
 </div>
 <div class="col-xl-3 col-sm-6">
     <partial name="_databox" model='new DataBoxModel {Icon="magic",IconColor="yellow",Text="Magic Topup Team",Data="0" }' />
@@ -79,7 +83,7 @@
 
 </div>
 <div class="col-xl-3 col-sm-6">
-    <partial name="_databox" model='new DataBoxModel {Icon="user-circle",IconColor="yellow",Text="Total Direct",Data="0" }' />
+    <partial name="_databox" model='new DataBoxModel {Icon="user-circle",IconColor="yellow",Text="Total Direct",Data=@directcount.ToString() }' />
     <div class="card text-center bg-c-purple text-white">
         <div class="card-block">
             <img src="~/files/assets/images/ekyc.png" alt="prodimg" class="img-fluid img-80 img-radius">

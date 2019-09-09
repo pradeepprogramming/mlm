@@ -22,8 +22,10 @@ namespace pradeepm.Controllers
             var binarydetails = _db.Userbinaries.FromSql($"sp_userbinarydetails {ModelGloble.loginuser.loignid}").AsEnumerable();
             ViewBag.leftcount = 0;
             ViewBag.rightcount = 0;
-            ViewBag.directcount = 0;
-            ViewBag.binarycount = 0;
+            ViewBag.directcount = binarydetails.Select(s => s.Sponser).FirstOrDefault();
+            ViewBag.debit = binarydetails.Select(s => s.Debit).FirstOrDefault();
+            ViewBag.credit = binarydetails.Select(s => s.Credit).FirstOrDefault();
+            ViewBag.binarycount = binarydetails.Select(s=>s.Usedbinary).FirstOrDefault();
             if(binarydetails.Where(w=>w.Legno==1).Count()>0)
                 ViewBag.leftcount = binarydetails.Where(w => w.Legno == 1).Select(s => s.Count).FirstOrDefault();
             if (binarydetails.Where(w => w.Legno == 2).Count() > 0)
