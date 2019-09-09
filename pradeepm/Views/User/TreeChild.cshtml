@@ -10,28 +10,36 @@
 {
 
     <li>
-        <span class="caret" data-id="@leftaccount.Id"> <span class="label label-primary">Left Leg</span> @Model[0].AccountId  <span class="label label-info">@Model[0].DisplayName</span> </span>
+        <a href="#"class="caret" data-id="@leftaccount.Id">
+            <div >  @Model[0].AccountId  <div class="label label-info">@Model[0].DisplayName</div> </div>
+        </a>
         <ul class="nested"></ul>
     </li>
 }
 else
 {
     <li>
-        <span class=""> <span class="label label-primary">Left Leg</span> <span class="label label-warning">Blank Leg</span> </span>
-        
+        <a href="#" >
+            <span class="">  <span class="label label-warning">Blank Leg</span> </span>
+        </a>
+
     </li>
 }
 @if (rightaccount != null)
 {
     <li>
-        <span class="caret"  data-id="@rightaccount.Id"> <span class="label label-primary">Right Leg</span> @Model[0].AccountId <span class="label label-info">@Model[0].DisplayName</span> </span>
+        <a href="#" class="caret" data-id="@rightaccount.Id">
+            <div >  @Model[0].AccountId <div class="label label-info">@Model[0].DisplayName</div> </div>
+        </a>
         <ul class="nested"></ul>
     </li>
 }
 else
 {
     <li>
-        <span class=""> <span class="label label-primary">Right Leg</span> <span class="label label-warning">Blank Leg</span> </span>
-        
+        <a href="#" >
+            <span class="">  <span class="label label-warning">Blank Leg</span> </span>
+        </a>
+
     </li>
 }
