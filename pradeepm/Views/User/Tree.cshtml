@@ -15,73 +15,75 @@
                 <ul id="myUL">
                     <li>
                         @* vertical tree <span class="caret">Beverages</span>
-                <ul class="nested">
-                    <li>
-                        <span class="caret">Tea</span>
-                        <ul class="nested">
-                            <li>
-                                <span class="caret">Green Tea</span>
-                                <ul class="nested">
-                                    <li>Sencha</li>
-                                    <li>Gyokuro</li>
-                                    <li>Matcha</li>
-                                    <li>Pi Lo Chun</li>
+                            <ul class="nested">
+                                <li>
+                                    <span class="caret">Tea</span>
+                                    <ul class="nested">
+                                        <li>
+                                            <span class="caret">Green Tea</span>
+                                            <ul class="nested">
+                                                <li>Sencha</li>
+                                                <li>Gyokuro</li>
+                                                <li>Matcha</li>
+                                                <li>Pi Lo Chun</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>*@
+
+                        @* hozontal tree
+                                                        <div class="tree">
+                                <ul>
+                                    <li>
+                                        <a href="#">1</a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">2</a>
+                                                <ul>
+                                        <li>
+                                                        <a href="#">2.1</a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">2.2</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">3</a>
+                                                <ul>
+                                                    <ul>
+                                        <li>
+                                                        <a href="#">3.1</a>
+                                          <ul>
+                                        <li>
+                                                        <a href="#">3.1.1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">3.1.2</a>
+                                                    </li>
+                                                </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">3.2</a>
+                                                    </li>
+                                                </ul>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
+                            </div>
+
+                        *@
+                        <a href="#" class="caret" data-id="@Model.Id" datalevel="0">
+                            <div>@Model.AccountId <div class="label label-info">@Model.DisplayName</div> </div>
+                        </a>
+                        <ul class="nested">
+                            @await Component.InvokeAsync("TreeChild", new {upperid=Model.Id,level=0 })
                         </ul>
                     </li>
-                </ul>*@
-
-                        @* hozontal tree 
-                            <div class="tree">
-	<ul>
-		<li>
-			<a href="#">1</a>
-			<ul>
-				<li>
-					<a href="#">2</a>
-					<ul>
-            <li>
-							<a href="#">2.1</a>
-              
-						</li>
-						<li>
-							<a href="#">2.2</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">3</a>
-					<ul>
-						<ul>
-            <li>
-							<a href="#">3.1</a>
-              <ul>
-            <li>
-							<a href="#">3.1.1</a>
-						</li>
-						<li>
-							<a href="#">3.1.2</a>
-						</li>
-					</ul>
-						</li>
-						<li>
-							<a href="#">3.2</a>
-						</li>
-					</ul>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</div>
-
-                            *@
-                        <a href="#" class="caret"  data-id="@Model.Id">
-                            <div >@Model.AccountId <div class="label label-info">@Model.DisplayName</div> </div>
-                            </a>
-                            <ul class="nested"></ul>
-</li>
                 </ul>
             </div>
         </div>
@@ -92,164 +94,179 @@
 {
     <style>
         /*ul, #myUL {
-            list-style-type: none;
-        }
+                    list-style-type: none;
+                }
 
-        #myUL {
-            margin: 0;
-            padding: 0;
-        }
+                #myUL {
+                    margin: 0;
+                    padding: 0;
+                }
 
-            #myUL ul {
-                margin: 0;
-                padding-left: 40px;
-            }
+                    #myUL ul {
+                        margin: 0;
+                        padding-left: 40px;
+                    }
 
-        .caret {
-            cursor: pointer;
-            -webkit-user-select: none; 
-            -moz-user-select: none; 
-            -ms-user-select: none; 
-            user-select: none;
-        }
+                .caret {
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
 
-        #myUL li::before {
-            background-image: url("/files/assets/images/faq_man.png");
-            background-size: 30px 30px;
-            height: 30px;
-            width: 30px;
-            content: "";
-            position: relative;
-            display: inline-block;
-            text-align: center;
-            top: 10px;
-        }
+                #myUL li::before {
+                    background-image: url("/files/assets/images/faq_man.png");
+                    background-size: 30px 30px;
+                    height: 30px;
+                    width: 30px;
+                    content: "";
+                    position: relative;
+                    display: inline-block;
+                    text-align: center;
+                    top: 10px;
+                }
 
-        .caret::before {
-            content: "\25B6";
-            color: black;
-            display: inline-block;
-            margin-right: 6px;
-        }
+                .caret::before {
+                    content: "\25B6";
+                    color: black;
+                    display: inline-block;
+                    margin-right: 6px;
+                }
 
-        .caret-down::before {
-            -ms-transform: rotate(90deg); 
-            -webkit-transform: rotate(90deg); 
-            transform: rotate(90deg);
-        }
+                .caret-down::before {
+                    -ms-transform: rotate(90deg);
+                    -webkit-transform: rotate(90deg);
+                    transform: rotate(90deg);
+                }
 
-        .nested {
-            display: none;
-        }
+                .nested {
+                    display: none;
+                }
 
-        .active {
-            display: block;
-        }*/
+                .active {
+                    display: block;
+                }*/
 
 
 
 
 
         /*Now the CSS*/
-* {margin: 0; padding: 0;}
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-.tree ul {
-	padding-top: 20px; position: relative;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-}
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
 
-.tree li {
-	float: left; text-align: center;
-	list-style-type: none;
-	position: relative;
-	padding: 20px 5px 0 5px;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-}
+        .tree li {
+            float: left;
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
 
-/*We will use ::before and ::after to draw the connectors*/
+            /*We will use ::before and ::after to draw the connectors*/
 
-.tree li::before, .tree li::after{
-	content: '';
-	position: absolute; top: 0; right: 50%;
-	border-top: 1px solid #ccc;
-	width: 50%; height: 20px;
-}
-.tree li::after{
-	right: auto; left: 50%;
-	border-left: 1px solid #ccc;
-}
+            .tree li::before, .tree li::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 50%;
+                border-top: 1px solid #ccc;
+                width: 50%;
+                height: 20px;
+            }
 
-/*We need to remove left-right connectors from elements without 
-any siblings*/
-.tree li:only-child::after, .tree li:only-child::before {
-	display: none;
-}
+            .tree li::after {
+                right: auto;
+                left: 50%;
+                border-left: 1px solid #ccc;
+            }
 
-/*Remove space from the top of single children*/
-.tree li:only-child{ padding-top: 0;}
+            /*We need to remove left-right connectors from elements without
+        any siblings*/
+            .tree li:only-child::after, .tree li:only-child::before {
+                display: none;
+            }
 
-/*Remove left connector from first child and 
-right connector from last child*/
-.tree li:first-child::before, .tree li:last-child::after{
-	border: 0 none;
-}
-/*Adding back the vertical connector to the last nodes*/
-.tree li:last-child::before{
-	border-right: 1px solid #ccc;
-	border-radius: 0 5px 0 0;
-	-webkit-border-radius: 0 5px 0 0;
-	-moz-border-radius: 0 5px 0 0;
-}
-.tree li:first-child::after{
-	border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	-moz-border-radius: 5px 0 0 0;
-}
+            /*Remove space from the top of single children*/
+            .tree li:only-child {
+                padding-top: 0;
+            }
 
-/*Time to add downward connectors from parents*/
-.tree ul ul::before{
-	content: '';
-	position: absolute; top: 0; left: 50%;
-	border-left: 1px solid #ccc;
-	width: 0; height: 20px;
-}
+            /*Remove left connector from first child and
+        right connector from last child*/
+            .tree li:first-child::before, .tree li:last-child::after {
+                border: 0 none;
+            }
+            /*Adding back the vertical connector to the last nodes*/
+            .tree li:last-child::before {
+                border-right: 1px solid #ccc;
+                border-radius: 0 5px 0 0;
+                -webkit-border-radius: 0 5px 0 0;
+                -moz-border-radius: 0 5px 0 0;
+            }
 
-.tree li a{
-	border: 1px solid #ccc;
-	padding: 5px 10px;
-	text-decoration: none;
-	color: #666;
-	font-family: arial, verdana, tahoma;
-	font-size: 11px;
-	display: inline-block;
-	
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-}
+            .tree li:first-child::after {
+                border-radius: 5px 0 0 0;
+                -webkit-border-radius: 5px 0 0 0;
+                -moz-border-radius: 5px 0 0 0;
+            }
 
-/*Time for some hover effects*/
-/*We will apply the hover effect the the lineage of the element also*/
-.tree li a:hover, .tree li a:hover+ul li a {
-	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
-}
-/*Connector styles on hover*/
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
-.tree li a:hover+ul ul::before{
-	border-color:  #94a0b4;
-}
+        /*Time to add downward connectors from parents*/
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid #ccc;
+            width: 0;
+            height: 20px;
+        }
+
+        .tree li a {
+            border: 1px solid #ccc;
+            height:44px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #666;
+            font-family: arial, verdana, tahoma;
+            font-size: 11px;
+            display: inline-block;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+        }
+
+            /*Time for some hover effects*/
+            /*We will apply the hover effect the the lineage of the element also*/
+            .tree li a:hover, .tree li a:hover + ul li a {
+                background: #c8e4f8;
+                color: #000;
+                border: 1px solid #94a0b4;
+            }
+                /*Connector styles on hover*/
+                .tree li a:hover + ul li::after,
+                .tree li a:hover + ul li::before,
+                .tree li a:hover + ul::before,
+                .tree li a:hover + ul ul::before {
+                    border-color: #94a0b4;
+                }
     </style>
 }
 @section scripts
@@ -259,21 +276,26 @@ right connector from last child*/
             var toggler = document.getElementsByClassName("caret");
             var i;
 
-            $(document).on('click',".caret", function () {
+            $(document).on('click', ".caret", function () {
                 var nested = this.parentElement.querySelector(".nested");
                 nested.classList.toggle("active");
 
                 this.classList.toggle("caret-down");
                 var id = this.getAttribute("data-id");
-                console.log("currect user id=" + id + " nested child element=" + nested.childElementCount);
-                if (nested.childElementCount == 0) {
-                    nested.innerHTML = "Wait for Data....";
-                    $.ajax({
-                        url: "treeChild?upperid=" + id,
-                        success: function (data) {
-                            nested.innerHTML = data;
-                        }
-                    });
+                var level = this.getAttribute("data-level");
+                if (level < 3) {
+                    //console.log("currect user id=" + id + " nested child element=" + nested.childElementCount);
+                    //if (nested.childElementCount == 0) {
+                    //    nested.innerHTML = "Wait for Data....";
+                    //    $.ajax({
+                    //        url: "treeChild?upperid=" + id + "&level=" + level,
+                    //        success: function (data) {
+                    //            nested.innerHTML = data;
+                    //        }
+                    //    });
+                    //}
+                } else {
+                    window.location("\Tree?currentid=" + id);
                 }
             });
 

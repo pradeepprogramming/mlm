@@ -1,0 +1,62 @@
+﻿@model List<AccountUsers>
+@{
+    Layout = null;
+
+    var leftaccount = Model.Where(w => w.Side == 1).FirstOrDefault();
+    var rightaccount = Model.Where(w => w.Side == 2).FirstOrDefault();
+    int level = ViewBag.level + 1;
+}
+@if (level <= 3)
+{
+
+    if (leftaccount != null)
+    {
+
+        <li>
+            <a href="#" class="caret" data-id="@leftaccount.Id" data-level="@level">
+                <div>@leftaccount.AccountId  <div class="label label-info">@leftaccount.DisplayName</div> </div>
+            </a>
+            <ul class="nested">
+
+                @await Component.InvokeAsync("TreeChild", new { upperid = leftaccount.Id, level = level })
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="#">
+                <span class="">  <span class="label label-warning">Blank Leg</span> </span>
+            </a>
+            <ul class="nested">
+
+                @await Component.InvokeAsync("TreeChild", new { upperid = -1, level = level })
+            </ul>
+
+        </li>
+    }
+    if (rightaccount != null)
+    {
+        <li>
+            <a href="#" class="caret" data-id="@rightaccount.Id" data-level="@level">
+                <div>  @rightaccount.AccountId <div class="label label-info">@rightaccount.DisplayName</div> </div>
+            </a>
+            <ul class="nested">
+                @await Component.InvokeAsync("TreeChild", new { upperid = rightaccount.Id, level = level })
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a href="#">
+                <span class="">  <span class="label label-warning">Blank Leg</span> </span>
+            </a>
+            <ul class="nested">
+
+                @await Component.InvokeAsync("TreeChild", new { upperid = -1, level = level })
+            </ul>
+
+        </li>
+    }
+}

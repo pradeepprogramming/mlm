@@ -4,16 +4,22 @@
 
     var leftaccount = Model.Where(w => w.Side == 1).FirstOrDefault();
     var rightaccount = Model.Where(w => w.Side == 2).FirstOrDefault();
+    int level = ViewBag.level;
 }
+@if (level <= 3)
+{
 
-@if (leftaccount != null)
+if (leftaccount != null)
 {
 
     <li>
         <a href="#"class="caret" data-id="@leftaccount.Id">
-            <div >  @Model[0].AccountId  <div class="label label-info">@Model[0].DisplayName</div> </div>
+            <div>@leftaccount.AccountId  <div class="label label-info">@leftaccount.DisplayName</div> </div>
         </a>
-        <ul class="nested"></ul>
+        <ul class="nested">
+
+            @await Component.InvokeAsync("TreeChild", new { upperid = leftaccount.Id, level = level })
+        </ul>
     </li>
 }
 else
@@ -25,13 +31,15 @@ else
 
     </li>
 }
-@if (rightaccount != null)
+if (rightaccount != null)
 {
     <li>
         <a href="#" class="caret" data-id="@rightaccount.Id">
-            <div >  @Model[0].AccountId <div class="label label-info">@Model[0].DisplayName</div> </div>
+            <div >  @rightaccount.AccountId <div class="label label-info">@rightaccount.DisplayName</div> </div>
         </a>
-        <ul class="nested"></ul>
+        <ul class="nested">
+            @await Component.InvokeAsync("TreeChild", new { upperid = rightaccount.Id, level = level })
+        </ul>
     </li>
 }
 else
@@ -42,4 +50,5 @@ else
         </a>
 
     </li>
+}
 }
